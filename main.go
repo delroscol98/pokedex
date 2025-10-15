@@ -13,7 +13,7 @@ type cliCommand struct {
 	callback    func() error
 }
 
-func main() {
+func getCommandRegistry() map[string]cliCommand {
 	commandRegistry := map[string]cliCommand{
 		"exit": {
 			name:        "exit",
@@ -26,7 +26,10 @@ func main() {
 			callback:    commandHelp,
 		},
 	}
+	return commandRegistry
+}
 
+func main() {
 	scanner := bufio.NewScanner(os.Stdin)
 	for {
 		fmt.Print("Pokedex > ")
@@ -40,17 +43,16 @@ func main() {
 
 		userInput := words[0]
 
-		switch userInput {
-		case "exit":
-			commandRegistry["exit"].callback()
-		case "help":
-			commandRegistry["help"].callback()
-			for key, command := range commandRegistry {
-				helpOutput := fmt.Sprintf("%s: %s", key, command.description)
-				fmt.Println(helpOutput)
+		command, exists := getCommandRegistry()[userInput]
+		if exists {
+			err := command.callback()
+			if err != nil {
+				fmt.Println(err)
 			}
-		default:
+			continue
+		} else {
 			fmt.Println("Unknown command")
+			continue
 		}
 	}
 }
