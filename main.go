@@ -7,7 +7,19 @@ import (
 	"strings"
 )
 
+type Config struct {
+	Count    int     `json:"count"`
+	Next     *string `json:"next"`
+	Previous *string `json:"previous"`
+	Results  []struct {
+		Name string `json:"name"`
+		URL  string `json:"url"`
+	} `json:"results"`
+}
+
 func main() {
+	cfg := &Config{}
+
 	scanner := bufio.NewScanner(os.Stdin)
 	for {
 		fmt.Print("Pokedex > ")
@@ -20,10 +32,11 @@ func main() {
 		}
 
 		userInput := words[0]
+		args := words
 
 		command, exists := getCommandRegistry()[userInput]
 		if exists {
-			err := command.callback()
+			err := command.callback(cfg, args)
 			if err != nil {
 				fmt.Println(err)
 			}
