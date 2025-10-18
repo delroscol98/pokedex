@@ -9,7 +9,7 @@ import (
 	"github.com/delroscol98/pokedex/internal/pokecache"
 )
 
-func GetLocationAreaAPI(cache *pokecache.Cache, config *Config, url string) error {
+func GetLocationAreaAPI(cache *pokecache.Cache, config *LocationConfig, url string) error {
 	var (
 		data   []byte
 		res    *http.Response

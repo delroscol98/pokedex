@@ -8,7 +8,7 @@ import (
 type cliCommand struct {
 	name        string
 	description string
-	callback    func(*pokecache.Cache, *pokeapi.Config, []string) error
+	callback    func(*pokecache.Cache, *pokeapi.LocationConfig, []string) error
 }
 
 func getCommandRegistry() map[string]cliCommand {

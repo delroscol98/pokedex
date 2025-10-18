@@ -1,7 +1,6 @@
 package pokecache
 
 import (
-	"fmt"
 	"sync"
 	"time"
 )
@@ -34,11 +33,6 @@ func (c *Cache) Add(key string, val []byte) {
 
 	c.mu.Lock()
 	c.data[key] = entry
-
-	for key := range c.data {
-		fmt.Println(key)
-	}
-
 	c.mu.Unlock()
 }
 

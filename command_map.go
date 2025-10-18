@@ -8,29 +8,29 @@ import (
 	"github.com/delroscol98/pokedex/internal/pokecache"
 )
 
-func commandMap(cache *pokecache.Cache, config *pokeapi.Config, args []string) error {
+func commandMap(cache *pokecache.Cache, locConfig *pokeapi.LocationConfig, args []string) error {
 	var url string
-	if args[0] == "mapb" && config.Previous == nil {
+	if args[0] == "mapb" && locConfig.Previous == nil {
 		return errors.New("You're on the first page")
 	}
 
-	if args[0] == "mapb" && config.Previous != nil {
-		url = *config.Previous
+	if args[0] == "mapb" && locConfig.Previous != nil {
+		url = *locConfig.Previous
 	}
 
-	if args[0] == "map" && config.Next == nil && config.Previous == nil {
+	if args[0] == "map" && locConfig.Next == nil && locConfig.Previous == nil {
 		url = pokeapi.BaseUrl + "location-area/?offset=0&limit=20"
 	}
 
-	if args[0] == "map" && config.Next != nil {
-		url = *config.Next
+	if args[0] == "map" && locConfig.Next != nil {
+		url = *locConfig.Next
 	}
 
-	if err := pokeapi.GetLocationAreaAPI(cache, config, url); err != nil {
+	if err := pokeapi.GetLocationAreaAPI(cache, locConfig, url); err != nil {
 		return err
 	}
 
-	for _, item := range config.Results {
+	for _, item := range locConfig.Results {
 		fmt.Println(item.Name)
 	}
 
