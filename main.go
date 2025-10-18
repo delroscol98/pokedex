@@ -6,7 +6,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/delroscol98/pokedex/pokeapi"
+	"github.com/delroscol98/pokedex/internal/pokeapi"
 )
 
 func main() {

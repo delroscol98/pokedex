@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/delroscol98/pokedex/pokeapi"
+	"github.com/delroscol98/pokedex/internal/pokeapi"
 )
 
 func commandExit(config *pokeapi.Config, args []string) error {

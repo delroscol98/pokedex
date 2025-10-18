@@ -4,7 +4,7 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/delroscol98/pokedex/pokeapi"
+	"github.com/delroscol98/pokedex/internal/pokeapi"
 )
 
 func commandMap(config *pokeapi.Config, args []string) error {
