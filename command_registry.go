@@ -1,9 +1,11 @@
 package main
 
+import "github.com/delroscol98/pokedex/pokeapi"
+
 type cliCommand struct {
 	name        string
 	description string
-	callback    func(*Config, []string) error
+	callback    func(*pokeapi.Config, []string) error
 }
 
 func getCommandRegistry() map[string]cliCommand {

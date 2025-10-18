@@ -5,20 +5,12 @@ import (
 	"fmt"
 	"os"
 	"strings"
+
+	"github.com/delroscol98/pokedex/pokeapi"
 )
 
-type Config struct {
-	Count    int     `json:"count"`
-	Next     *string `json:"next"`
-	Previous *string `json:"previous"`
-	Results  []struct {
-		Name string `json:"name"`
-		URL  string `json:"url"`
-	} `json:"results"`
-}
-
 func main() {
-	cfg := &Config{}
+	cfg := &pokeapi.Config{}
 
 	scanner := bufio.NewScanner(os.Stdin)
 	for {
