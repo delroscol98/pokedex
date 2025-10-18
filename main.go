@@ -5,12 +5,15 @@ import (
 	"fmt"
 	"os"
 	"strings"
+	"time"
 
 	"github.com/delroscol98/pokedex/internal/pokeapi"
+	"github.com/delroscol98/pokedex/internal/pokecache"
 )
 
 func main() {
 	cfg := &pokeapi.Config{}
+	cache := pokecache.NewCache(5 * time.Second)
 
 	scanner := bufio.NewScanner(os.Stdin)
 	for {
@@ -28,7 +31,7 @@ func main() {
 
 		command, exists := getCommandRegistry()[userInput]
 		if exists {
-			err := command.callback(cfg, args)
+			err := command.callback(cache, cfg, args)
 			if err != nil {
 				fmt.Println(err)
 			}

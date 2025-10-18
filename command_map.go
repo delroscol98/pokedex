@@ -5,9 +5,10 @@ import (
 	"fmt"
 
 	"github.com/delroscol98/pokedex/internal/pokeapi"
+	"github.com/delroscol98/pokedex/internal/pokecache"
 )
 
-func commandMap(config *pokeapi.Config, args []string) error {
+func commandMap(cache *pokecache.Cache, config *pokeapi.Config, args []string) error {
 	var url string
 	if args[0] == "mapb" && config.Previous == nil {
 		return errors.New("You're on the first page")
@@ -18,14 +19,14 @@ func commandMap(config *pokeapi.Config, args []string) error {
 	}
 
 	if args[0] == "map" && config.Next == nil && config.Previous == nil {
-		url = pokeapi.BaseUrl + "location-area/"
+		url = pokeapi.BaseUrl + "location-area/?offset=0&limit=20"
 	}
 
 	if args[0] == "map" && config.Next != nil {
 		url = *config.Next
 	}
 
-	if err := pokeapi.GetLocationAreaAPI(config, url); err != nil {
+	if err := pokeapi.GetLocationAreaAPI(cache, config, url); err != nil {
 		return err
 	}
 

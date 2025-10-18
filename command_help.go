@@ -4,9 +4,10 @@ import (
 	"fmt"
 
 	"github.com/delroscol98/pokedex/internal/pokeapi"
+	"github.com/delroscol98/pokedex/internal/pokecache"
 )
 
-func commandHelp(config *pokeapi.Config, args []string) error {
+func commandHelp(cache *pokecache.Cache, config *pokeapi.Config, args []string) error {
 	fmt.Println("Welcome to the Pokedex!")
 	fmt.Println("Usage:")
 	fmt.Println()

@@ -1,11 +1,14 @@
 package main
 
-import "github.com/delroscol98/pokedex/internal/pokeapi"
+import (
+	"github.com/delroscol98/pokedex/internal/pokeapi"
+	"github.com/delroscol98/pokedex/internal/pokecache"
+)
 
 type cliCommand struct {
 	name        string
 	description string
-	callback    func(*pokeapi.Config, []string) error
+	callback    func(*pokecache.Cache, *pokeapi.Config, []string) error
 }
 
 func getCommandRegistry() map[string]cliCommand {
