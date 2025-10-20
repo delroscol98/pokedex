@@ -8,7 +8,7 @@ import (
 	"github.com/delroscol98/pokedex/internal/pokecache"
 )
 
-func commandExplore(cache *pokecache.Cache, locationConfig *pokeapi.LocationConfig, pokemonConfig *pokeapi.PokemonConfig, args []string) error {
+func commandExplore(cache *pokecache.Cache, ocationConfig *pokeapi.LocationConfig, pokemonConfig *pokeapi.PokemonConfig, pokemonDataConfig *pokeapi.PokemonDataConfig, args []string) error {
 	if len(args) == 1 {
 		return errors.New("What location would you like to explore? Example: 'explore pastoria-city-area'.")
 	}
@@ -20,7 +20,7 @@ func commandExplore(cache *pokecache.Cache, locationConfig *pokeapi.LocationConf
 
 	err := pokeapi.GetPokemonInLocationAreaAPI(cache, pokemonConfig, url)
 	if err != nil {
-		return err
+		return errors.New("Invalid location specified. Try again!")
 	}
 
 	for _, item := range pokemonConfig.PokemonEncounters {

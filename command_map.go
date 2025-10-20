@@ -8,7 +8,7 @@ import (
 	"github.com/delroscol98/pokedex/internal/pokecache"
 )
 
-func commandMap(cache *pokecache.Cache, locConfig *pokeapi.LocationConfig, pokemonConfig *pokeapi.PokemonConfig, args []string) error {
+func commandMap(cache *pokecache.Cache, locConfig *pokeapi.LocationConfig, pokemonConfig *pokeapi.PokemonConfig, pokemonDataConfig *pokeapi.PokemonDataConfig, args []string) error {
 	var url string
 	if args[0] == "mapb" && locConfig.Previous == nil {
 		return errors.New("You're on the first page")

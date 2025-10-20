@@ -8,7 +8,7 @@ import (
 type cliCommand struct {
 	name        string
 	description string
-	callback    func(*pokecache.Cache, *pokeapi.LocationConfig, *pokeapi.PokemonConfig, []string) error
+	callback    func(*pokecache.Cache, *pokeapi.LocationConfig, *pokeapi.PokemonConfig, *pokeapi.PokemonDataConfig, []string) error
 }
 
 func getCommandRegistry() map[string]cliCommand {
@@ -37,6 +37,11 @@ func getCommandRegistry() map[string]cliCommand {
 			name:        "explore",
 			description: "lists all the pokemon in the specified location",
 			callback:    commandExplore,
+		},
+		"catch": {
+			name:        "catch",
+			description: "catches a pokemon in the explored location",
+			callback:    commandCatch,
 		},
 	}
 	return commandRegistry
