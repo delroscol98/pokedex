@@ -8,7 +8,7 @@ import (
 	"github.com/delroscol98/pokedex/internal/pokecache"
 )
 
-func commandExplore(cache *pokecache.Cache, ocationConfig *pokeapi.LocationConfig, pokemonConfig *pokeapi.PokemonConfig, pokemonDataConfig *pokeapi.PokemonDataConfig, args []string) error {
+func commandExplore(pokedex map[string]pokeapi.PokemonDataConfig, cache *pokecache.Cache, ocationConfig *pokeapi.LocationConfig, pokemonConfig *pokeapi.PokemonConfig, pokemonDataConfig *pokeapi.PokemonDataConfig, args []string) error {
 	if len(args) == 1 {
 		return errors.New("What location would you like to explore? Example: 'explore pastoria-city-area'.")
 	}
