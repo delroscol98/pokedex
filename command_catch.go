@@ -30,12 +30,11 @@ func commandCatch(pokedex map[string]pokeapi.PokemonDataConfig, cache *pokecache
 func throwPokeball(pokedex map[string]pokeapi.PokemonDataConfig, pokemon string, pokemonDataConfig *pokeapi.PokemonDataConfig) {
 	fmt.Printf("Throwing a Pokeball at %s...\n", pokemon)
 
-	catchBaseline := math.Floor(0.6 * float64(pokemonDataConfig.BaseExperience))
+	catchBaseline := math.Floor(0.3 * float64(pokemonDataConfig.BaseExperience))
 	catchNumber := rand.Float64() * float64(pokemonDataConfig.BaseExperience)
 
 	if catchNumber < catchBaseline {
 		fmt.Printf("%s escaped!\n", pokemon)
-		pokedex[pokemon] = pokeapi.PokemonDataConfig{}
 	} else {
 		fmt.Printf("%s was caught!\n", pokemon)
 		pokedex[pokemon] = *pokemonDataConfig
