@@ -12,6 +12,7 @@ import (
 )
 
 func main() {
+	pokedex := map[string]pokeapi.PokemonDataConfig{}
 	locConfig := &pokeapi.LocationConfig{}
 	pokemonConfig := &pokeapi.PokemonConfig{}
 	pokemonDataConfig := &pokeapi.PokemonDataConfig{}
@@ -33,7 +34,7 @@ func main() {
 
 		command, exists := getCommandRegistry()[userInput]
 		if exists {
-			err := command.callback(cache, locConfig, pokemonConfig, pokemonDataConfig, args)
+			err := command.callback(pokedex, cache, locConfig, pokemonConfig, pokemonDataConfig, args)
 			if err != nil {
 				fmt.Println(err)
 			}
