@@ -14,6 +14,7 @@ import (
 func main() {
 	locConfig := &pokeapi.LocationConfig{}
 	pokemonConfig := &pokeapi.PokemonConfig{}
+	pokemonDataConfig := &pokeapi.PokemonDataConfig{}
 	cache := pokecache.NewCache(5 * time.Second)
 
 	scanner := bufio.NewScanner(os.Stdin)
@@ -32,7 +33,7 @@ func main() {
 
 		command, exists := getCommandRegistry()[userInput]
 		if exists {
-			err := command.callback(cache, locConfig, pokemonConfig, args)
+			err := command.callback(cache, locConfig, pokemonConfig, pokemonDataConfig, args)
 			if err != nil {
 				fmt.Println(err)
 			}
