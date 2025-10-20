@@ -38,5 +38,6 @@ func throwPokeball(pokedex map[string]pokeapi.PokemonDataConfig, pokemon string,
 	} else {
 		fmt.Printf("%s was caught!\n", pokemon)
 		pokedex[pokemon] = *pokemonDataConfig
+		fmt.Println("You may now inspect it with the inspect command")
 	}
 }

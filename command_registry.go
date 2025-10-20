@@ -48,6 +48,11 @@ func getCommandRegistry() map[string]cliCommand {
 			description: "displays information about pokemon in the pokedex",
 			callback:    commandInspect,
 		},
+		"pokedex": {
+			name:        "pokedex",
+			description: "displays all pokemon in pokedex",
+			callback:    commandPokedex,
+		},
 	}
 	return commandRegistry
 }
