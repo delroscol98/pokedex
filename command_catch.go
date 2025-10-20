@@ -35,9 +35,9 @@ func throwPokeball(pokedex map[string]pokeapi.PokemonDataConfig, pokemon string,
 
 	if catchNumber < catchBaseline {
 		fmt.Printf("%s escaped!\n", pokemon)
+		pokedex[pokemon] = pokeapi.PokemonDataConfig{}
 	} else {
 		fmt.Printf("%s was caught!\n", pokemon)
+		pokedex[pokemon] = *pokemonDataConfig
 	}
-
-	pokedex[pokemon] = *pokemonDataConfig
 }
