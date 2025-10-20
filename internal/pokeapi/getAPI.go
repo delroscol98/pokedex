@@ -60,3 +60,15 @@ func GetPokemonInLocationAreaAPI(cache *pokecache.Cache, pokemonConfig *PokemonC
 
 	return nil
 }
+
+func GetPokemonDataAPI(cache *pokecache.Cache, pokemonDataConfig *PokemonDataConfig, url string) error {
+	data, err := handleGetRequest(cache, url)
+	if err != nil {
+		return err
+	}
+	if err := json.Unmarshal(data, &pokemonDataConfig); err != nil {
+		return err
+	}
+
+	return nil
+}
