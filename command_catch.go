@@ -10,31 +10,25 @@ import (
 	"github.com/delroscol98/pokedex/internal/pokecache"
 )
 
-func commandCatch(cache *pokecache.Cache, locationConfig *pokeapi.LocationConfig, pokemonConfig *pokeapi.PokemonConfig, pokemonDataConfig *pokeapi.PokemonDataConfig, args []string) error {
+func commandCatch(pokedex map[string]pokeapi.PokemonDataConfig, cache *pokecache.Cache, locationConfig *pokeapi.LocationConfig, pokemonConfig *pokeapi.PokemonConfig, pokemonDataConfig *pokeapi.PokemonDataConfig, args []string) error {
 	if len(args) == 1 {
 		return errors.New("Which pokemon are you catching? Example: 'catch squirtle'.")
 	}
 
 	pokemon := args[1]
+	url := pokeapi.BaseUrl + "pokemon/" + pokemon
 
-	for _, item := range pokemonConfig.PokemonEncounters {
-		if pokemon == item.Pokemon.Name {
-			url := item.Pokemon.URL
-			if err := pokeapi.GetPokemonDataAPI(cache, pokemonDataConfig, url); err != nil {
-				return err
-			}
-
-			throwPokeball(pokemon, pokemonDataConfig)
-
-			return nil
-		}
+	if err := pokeapi.GetPokemonDataAPI(cache, pokemonDataConfig, url); err != nil {
+		return err
 	}
 
-	return errors.New("Specified pokemon not in explored area. Use 'explore <location-area>' to view pokemon in specified area.'")
+	throwPokeball(pokedex, pokemon, pokemonDataConfig)
+
+	return nil
 }
 
-func throwPokeball(pokemon string, pokemonDataConfig *pokeapi.PokemonDataConfig) {
-	fmt.Printf("Throwing a Pokeball at %s\n", pokemon)
+func throwPokeball(pokedex map[string]pokeapi.PokemonDataConfig, pokemon string, pokemonDataConfig *pokeapi.PokemonDataConfig) {
+	fmt.Printf("Throwing a Pokeball at %s...\n", pokemon)
 
 	catchBaseline := math.Floor(0.6 * float64(pokemonDataConfig.BaseExperience))
 	catchNumber := rand.Float64() * float64(pokemonDataConfig.BaseExperience)
@@ -44,4 +38,6 @@ func throwPokeball(pokemon string, pokemonDataConfig *pokeapi.PokemonDataConfig)
 	} else {
 		fmt.Printf("%s was caught!\n", pokemon)
 	}
+
+	pokedex[pokemon] = *pokemonDataConfig
 }
